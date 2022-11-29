@@ -64,12 +64,24 @@ class UserServiceImplTest {
     @Test
     @Order(3)
     @DisplayName("Find user works")
-    void getUserDetails() {
+    void testGetUserDetails_WhenProvidedWithValidUserId_returnUserDetails() {
+        //Act
+
+        Map userDetails = userService.getUserDetaiils(createdUserId);
+
+        //Assert
+        assertNotNull(userDetails, "user details should not be null");
+        assertEquals(createdUserId, userDetails.get("userId"), "Returned user details contains incorrect user id");
     }
 
     @Test
     @Order(4)
     @DisplayName("Delete user works")
-    void deleteUser() {
+    void testDeleteUser_whenProvidedWithValidUserId_returnUserDetails() {
+        //Act
+        userService.deleteUser(createdUserId);
+
+        //Assert
+        assertNull(userService.getUserDetaiils(createdUserId), "user should not been found");
     }
 }
